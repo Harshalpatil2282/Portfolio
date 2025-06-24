@@ -1,0 +1,96 @@
+.projects-section {
+  background: linear-gradient(to bottom, #0f0f0f, #1c1c1c);
+  padding: 80px 40px;
+  color: #fff;
+  text-align: center;
+  min-height: 100vh;
+}
+
+.projects-heading {
+  font-size: 2.8rem;
+  color: #00e6e6;
+  margin-bottom: 60px;
+  animation: glow 2s infinite alternate;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.projects-grid {
+  display: grid;
+  gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  justify-items: center;
+}
+
+.project-card {
+  background: rgba(30, 30, 30, 0.85);
+  border: 2px solid #00ffff33;
+  border-radius: 20px;
+  padding: 25px;
+  transition: 0.3s ease;
+  box-shadow: 0 0 15px #00ffff33;
+  text-align: center;
+  max-width: 100%;
+}
+
+.project-card:hover {
+  box-shadow: 0 0 30px #00ffff77;
+  transform: translateY(-5px);
+}
+
+.project-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #00ffff66;
+}
+
+.project-title {
+  color: #ff00cc;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.project-desc {
+  font-size: 0.95rem;
+  color: #ccc;
+  margin-bottom: 15px;
+}
+
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.tech-badge {
+  background-color: #00ffff22;
+  padding: 6px 12px;
+  border-radius: 14px;
+  font-size: 0.8rem;
+  color: #00ffff;
+  border: 1px solid #00ffff55;
+}
+
+.project-links a {
+  margin: 0 10px;
+  color: #00ff99;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.project-links a:hover {
+  text-decoration: underline;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
+  }
+  to {
+    text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff;
+  }
+}
