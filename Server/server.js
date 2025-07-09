@@ -9,7 +9,7 @@ const contactRoutes = require("./routes/contactRoutes");
 const projectRoutes = require("./routes/projects");
 const skillsRoutes = require("./routes/skills");
 const { router: authRouter, verifyToken } = require("./routes/auth");
-console.log("Registered routes:");
+
 
 
 const app = express();
