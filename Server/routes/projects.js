@@ -4,15 +4,40 @@ const Project = require("../models/Project");
 const verifyToken = require("../middleware/verifyToken"); // Adjust path as needed
 
 // Create a project
+// router.post("/add", verifyToken, async (req, res) => {
+//   try {
+//     const project = new Project(req.body);
+//     await project.save();
+//     res.status(201).json(project);
+//   } catch (error) {
+//     res.status(400).json({ error: error.message });
+//   }
+// });
 router.post("/add", verifyToken, async (req, res) => {
   try {
-    const project = new Project(req.body);
+    const { title, description, techStack, image, github, link } = req.body;
+    
+    // Ensure techStack is stored as an array
+    const techStackArray = Array.isArray(techStack)
+      ? techStack
+      : techStack.split(",").map(tech => tech.trim());
+
+    const project = new Project({
+      title,
+      description,
+      techStack: techStackArray,
+      image,
+      github,
+      link,
+    });
+
     await project.save();
     res.status(201).json(project);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 });
+
 
 // Get all projects
 router.get("/", async (req, res) => {
