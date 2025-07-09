@@ -13,9 +13,14 @@ const { router: authRouter, verifyToken } = require("./routes/auth");
 
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 
 const _dirname = path.resolve();
+
+// const corsOptions = {
+//   origin:"https://hp-portfolio-ujjo.onrender.com",
+//   Credentials: true
+// }
 
 // Middleware
 app.use(cors());
@@ -36,11 +41,7 @@ app.get("*", (_, res) => {
 
 
 // MongoDB Connection
-mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
+mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     console.log("Connected to MongoDB");
     app.listen(PORT, () =>
