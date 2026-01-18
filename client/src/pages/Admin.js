@@ -129,6 +129,21 @@ const Admin = ({ setAuth }) => {
         }
     };
 
+    // Upload Resume section
+    const handleUploadResume = async (e) => {
+        const resumeFile = e.target.files[0];
+        if (!resumeFile) return;
+        
+        const formDataResume = new FormData();
+        formDataResume.append('resume', resumeFile);
+        try {
+            await axios.post('/api/resume/upload', formDataResume, config);
+            alert('Resume uploaded successfully!');
+        } catch (err) {
+            alert('Error uploading resume: ' + (err.response?.data?.error || 'Failed to upload resume'));
+        }
+    };
+
     // Logout handler
     const handleLogout = () => {
         localStorage.removeItem("token");
@@ -143,6 +158,23 @@ const Admin = ({ setAuth }) => {
                     Logout
                 </button>
             </div>
+
+            {/* Resume Upload Section */}
+            <div style={{ background: "#1a1a1a", padding: "20px", borderRadius: "8px", marginBottom: "30px", border: "1px solid #333" }}>
+                <h3>📄 Resume Management</h3>
+                <div style={{ display: "flex", gap: "1rem", alignItems: "center", flexWrap: "wrap" }}>
+                    <input 
+                        type="file" 
+                        onChange={handleUploadResume} 
+                        accept="application/pdf"
+                        style={{ padding: "8px" }}
+                    />
+                    <a href="/Harshal_Resume.pdf" download className="resume-btn" style={{ padding: "8px 16px", background: "#6366f1", color: "white", borderRadius: "4px", textDecoration: "none" }}>
+                        Download Current Resume
+                    </a>
+                </div>
+            </div>
+
             <h2>{editId ? "Edit Project" : "Add New Project"}</h2>
             <form className="admin-form" onSubmit={handleSubmit}>
                 <input type="text" name="title" value={formData.title} placeholder="Project Title" onChange={handleChange} required />

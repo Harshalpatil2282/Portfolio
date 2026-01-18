@@ -7,8 +7,11 @@ const skills = [
   "Full Stack Web Dev",
   "HTML, CSS, JS",
   "React + Node.js",
+  "Express.js",
   "Python",
-  "C++","JAVA","ML Enthusiast",
+  "C++","JAVA(Core)","Data Structures and Algorithms",
+  "Object-Oriented Programming","MongoDB",
+  "Git, GitHub","PostMan","backend","ML Enthusiast",
   "Creative Coding",
   "Open Source",
 ];
@@ -43,7 +46,7 @@ const About = () => {
             <span className="highlight">About Me</span>
           </h2>
           <p>
-            Hi! I’m <span className="highlight">Harshal Patil</span>, a passionate <span className="accent">Full Stack Developer</span> and <span className="accent">AI Enthusiast</span>. I love building seamless, modern web apps and exploring the world of <span className="accent">Machine Learning</span> and <span className="accent">AI-powered solutions</span>.
+            Hi! I’m <span className="highlight">Harshal Patil</span>, a passionate <span className="accent">Full Stack Developer</span> and <span className='accent'>Strong foundation in Java</span> , <span className="accent">AI Enthusiast</span>. I love building seamless, modern web apps and exploring the world of <span className="accent">Machine Learning</span> and <span className="accent">AI-powered solutions</span>.
           </p>
           <p>
             I enjoy teaching tech, solving real-world problems, and learning new things every day. Let’s create something <span className="highlight">amazing</span> together!
