@@ -1,13 +1,7 @@
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
-// Log configuration on startup
-// console.log("📧 Email Config:");
-// console.log("   User:", process.env.EMAIL_USER ? "✓ Set" : "✗ NOT SET");
-// console.log("   Password:", process.env.EMAIL_PASSWORD ? "✓ Set" : "✗ NOT SET");
-// console.log("   Admin Email:", process.env.ADMIN_EMAIL ? "✓ Set" : "✗ NOT SET");
-
-// Create transporter with Gmail
+// Create Gmail transporter
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -16,38 +10,29 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// Verify transporter on startup
-transporter.verify((error, success) => {
+// Verify transporter on startup — minimal output
+transporter.verify((error) => {
   if (error) {
-    console.log("❌ Email service error:", error.message);
+    console.error("Email service init failed:", error.message);
   } else {
-    console.log("✅ Email service ready!");
+    console.log("✅ Email service ready");
   }
 });
 
-// Send email function
+// Send email
 const sendEmail = async (to, subject, htmlContent) => {
   try {
-    console.log(`\n📤 Attempting to send email to: ${to}`);
-    
-    const mailOptions = {
+    await transporter.sendMail({
       from: process.env.EMAIL_USER,
-      to: to,
-      subject: subject,
+      to,
+      subject,
       html: htmlContent,
-    };
-
-    const info = await transporter.sendMail(mailOptions);
-    console.log("✅ Email sent successfully!");
-    console.log("   Message ID:", info.messageId);
-    console.log("   Response:", info.response);
-    return { success: true, message: "Email sent successfully" };
+    });
+    return { success: true };
   } catch (error) {
-    console.error("❌ Error sending email:", error.message);
-    console.error("   Full error:", error);
+    console.error("Email send error:", error.message);
     return { success: false, message: error.message };
   }
 };
 
 module.exports = { sendEmail };
-

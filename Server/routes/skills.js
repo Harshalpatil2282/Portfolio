@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Skill = require("../models/Skill");
-const verifyToken = require("../middleware/verifyToken"); // Adjust path as needed
+const verifyToken = require("../middleware/verifyToken");
 
 // Get all skills (public)
 router.get("/", async (req, res) => {
@@ -23,8 +23,8 @@ router.post("/add", verifyToken, async (req, res) => {
     await skill.save();
     res.status(201).json(skill);
   } catch (err) {
-    console.error("Error adding skill:", err); // This will show the real error in your backend console
-    res.status(500).json({ error: err.message });
+    console.error("Add skill error:", err.message);
+    res.status(500).json({ error: "Failed to add skill" });
   }
 });
 

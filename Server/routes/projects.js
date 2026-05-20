@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Project = require("../models/Project");
-const verifyToken = require("../middleware/verifyToken"); // Adjust path as needed
+const verifyToken = require("../middleware/verifyToken");
 
 // Create a project
 // router.post("/add", verifyToken, async (req, res) => {
@@ -55,7 +55,7 @@ router.delete("/delete/:id", verifyToken, async (req, res) => {
     await Project.findByIdAndDelete(req.params.id);
     res.status(200).json({ message: "Project deleted successfully" });
   } catch (error) {
-    console.error("Error deleting project:", error);
+    console.error("Error deleting project:", error.message);
     res.status(500).json({ error: "Failed to delete project" });
   }
 });
