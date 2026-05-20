@@ -4,31 +4,35 @@ import { motion } from 'framer-motion';
 
 const timelineData = [
   {
+  title: "Bachelor of Technology – Computer Engineering",
+  institution: "SVKM's NMIMS, Shirpur Campus",
+  duration: "2023 – 2027 ",
+  description: "Currently pursuing a B.Tech degree in Computer Engineering with a focus on full-stack development, data structures, algorithms, and software engineering principles."
+  },
+ 
+{
+  title: "Higher Secondary Education (Class 11 – 12)",
+  institution: "S.S.V.P.S. College, SNK",
+  duration: "2021 – 2023",
+  description: "After completing 10th , my curiosity for learning deepened — especially in the world of technology. With a strong foundation in mathematics and a genuine love for problem-solving, I naturally gravitated towards the science stream, setting the stage for my engineering journey. 12th Grade Percentage: 75.33%"
+},
+{
+  title: "Secondary Education (Class 5 – 10)",
+  institution: "Vivekanand Vidhyalaya High School, Khalane",
+  duration: "2016 – 2021",
+  description: "Completed SSC with distinction.10th Grade Percentage: 93.80%"
+},
+
+  {
   title: "Primary Education (Class 1 – 4)",
   institution: "Z.P. School",
   duration: "2012 – 2016",
   description: "Back when school meant more play than pressure — I went to class for the crayons, not the curriculum. Still, the spark of learning quietly took root."
 }
 ,
-{
-  title: "Secondary Education (Class 5 – 10)",
-  institution: "S.J.Y.B.M. High School",
-  duration: "2016 – 2021",
-  description: "Completed SSC with distinction.10th Grade Percentage: 93.80%"
-},
-{
-  title: "Higher Secondary Education (Class 11 – 12)",
-  institution: "S.S.V.P.S. College, SNK",
-  duration: "2021 – 2023",
-  description: "After completing 10th grade, my curiosity for learning deepened — especially in the world of technology. With a strong foundation in mathematics and a genuine love for problem-solving, I naturally gravitated towards the science stream, setting the stage for my engineering journey. 12th Grade Percentage: 75.33%"
-}
-,
-{
-  title: "Bachelor of Technology – Computer Engineering",
-  institution: "SVKM's NMIMS, Shirpur Campus",
-  duration: "2023 – 2027 (Expected)",
-  description: "Currently pursuing a B.Tech degree in Computer Engineering with a focus on full-stack development, data structures, algorithms, and software engineering principles."
-}
+
+
+
 
 ];
 

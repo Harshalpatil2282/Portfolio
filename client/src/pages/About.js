@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import axios from 'axios';
 import './About.css';
 import profile from "../assets/Harsh_profile.jpg";
 
@@ -9,14 +10,22 @@ const skills = [
   "React + Node.js",
   "Express.js",
   "Python",
-  "C++","JAVA(Core)","Data Structures and Algorithms",
-  "Object-Oriented Programming","MongoDB",
-  "Git, GitHub","PostMan","backend","ML Enthusiast",
+  "C++", "JAVA(Core)", "Data Structures and Algorithms",
+  "Object-Oriented Programming", "MongoDB",
+  "Git, GitHub", "PostMan", "backend", "ML Enthusiast",
   "Creative Coding",
   "Open Source",
 ];
 
 const About = () => {
+  const [resumeUrl, setResumeUrl] = useState('');
+
+  useEffect(() => {
+    axios.get('/api/resume/link')
+      .then(res => setResumeUrl(res.data.url || ''))
+      .catch(() => setResumeUrl(''));
+  }, []);
+
   return (
     <motion.section
       id="about"
@@ -33,9 +42,9 @@ const About = () => {
           transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
         >
           <img src={profile} alt="Harshal Patil" className="profile-img" />
-          {/* VFX Glow */}
           <div className="profile-glow"></div>
         </motion.div>
+
         <motion.div
           className="bio"
           initial={{ opacity: 0, x: 40 }}
@@ -46,11 +55,19 @@ const About = () => {
             <span className="highlight">About Me</span>
           </h2>
           <p>
-            Hi! I’m <span className="highlight">Harshal Patil</span>, a passionate <span className="accent">Full Stack Developer</span> and <span className='accent'>Strong foundation in Java</span> , <span className="accent">AI Enthusiast</span>. I love building seamless, modern web apps and exploring the world of <span className="accent">Machine Learning</span> and <span className="accent">AI-powered solutions</span>.
+            Hi! I'm <span className="highlight">Harshal Patil</span>, a passionate{' '}
+            <span className="accent">Full Stack Developer</span> and{' '}
+            <span className='accent'>Strong foundation in Java</span>,{' '}
+            <span className="accent">AI Enthusiast</span>. I love building seamless,
+            modern web apps and exploring the world of{' '}
+            <span className="accent">Machine Learning</span> and{' '}
+            <span className="accent">AI-powered solutions</span>.
           </p>
           <p>
-            I enjoy teaching tech, solving real-world problems, and learning new things every day. Let’s create something <span className="highlight">amazing</span> together!
+            I enjoy teaching tech, solving real-world problems, and learning new things every day.
+            Let's create something <span className="highlight">amazing</span> together!
           </p>
+
           <div className="about-skills">
             {skills.map((skill, idx) => (
               <motion.span
@@ -64,10 +81,23 @@ const About = () => {
               </motion.span>
             ))}
           </div>
-          <a href="/Harshal_Resume.pdf" download className="resume-btn">Download Resume</a>
+
+          {resumeUrl ? (
+            <a
+              href={resumeUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="resume-btn"
+            >
+              Download Resume
+            </a>
+          ) : (
+            <span className="resume-btn resume-btn-disabled">Resume Coming Soon</span>
+          )}
         </motion.div>
       </div>
-      {/* Animated VFX background bubbles */}
+
+      {/* VFX background bubbles */}
       <div className="about-vfx">
         {[...Array(8)].map((_, i) => (
           <span key={i} className={`bubble bubble${i + 1}`}></span>

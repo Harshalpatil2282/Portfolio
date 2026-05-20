@@ -2,10 +2,10 @@ const nodemailer = require("nodemailer");
 require("dotenv").config();
 
 // Log configuration on startup
-console.log("📧 Email Config:");
-console.log("   User:", process.env.EMAIL_USER ? "✓ Set" : "✗ NOT SET");
-console.log("   Password:", process.env.EMAIL_PASSWORD ? "✓ Set" : "✗ NOT SET");
-console.log("   Admin Email:", process.env.ADMIN_EMAIL ? "✓ Set" : "✗ NOT SET");
+// console.log("📧 Email Config:");
+// console.log("   User:", process.env.EMAIL_USER ? "✓ Set" : "✗ NOT SET");
+// console.log("   Password:", process.env.EMAIL_PASSWORD ? "✓ Set" : "✗ NOT SET");
+// console.log("   Admin Email:", process.env.ADMIN_EMAIL ? "✓ Set" : "✗ NOT SET");
 
 // Create transporter with Gmail
 const transporter = nodemailer.createTransport({

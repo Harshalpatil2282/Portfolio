@@ -1,49 +1,38 @@
 const express = require("express");
 const router = express.Router();
-const multer = require("multer");
-const path = require("path");
 const { verifyToken } = require("./auth");
-const fs = require("fs");
+const Resume = require("../models/Resume");
 
-// Configure multer for file upload
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    const uploadDir = path.join(__dirname, "../../client/public");
-    // Create directory if it doesn't exist
-    if (!fs.existsSync(uploadDir)) {
-      fs.mkdirSync(uploadDir, { recursive: true });
-    }
-    cb(null, uploadDir);
-  },
-  filename: (req, file, cb) => {
-    // Save as Harshal_Resume.pdf
-    cb(null, "Harshal_Resume.pdf");
-  },
-});
-
-const upload = multer({
-  storage: storage,
-  fileFilter: (req, file, cb) => {
-    // Only allow PDF files
-    if (file.mimetype === "application/pdf") {
-      cb(null, true);
-    } else {
-      cb(new Error("Only PDF files are allowed"));
-    }
-  },
-});
-
-// Upload resume endpoint
-router.post("/upload", verifyToken, upload.single("resume"), (req, res) => {
+// ── GET /api/resume/link  (public) ───────────────────────────────────────────
+// Returns the current resume drive link for display on the portfolio
+router.get("/link", async (req, res) => {
   try {
-    if (!req.file) {
-      return res.status(400).json({ error: "No file uploaded" });
+    const resume = await Resume.findOne();
+    res.json({ url: resume?.url || "" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// ── PUT /api/resume/link  (admin only) ───────────────────────────────────────
+// Admin can update the Google Drive / public URL for the resume
+router.put("/link", verifyToken, async (req, res) => {
+  try {
+    const { url } = req.body;
+    if (!url || !url.trim()) {
+      return res.status(400).json({ error: "URL is required" });
     }
-    res.json({ 
-      success: true, 
-      message: "Resume uploaded successfully",
-      filename: req.file.filename 
-    });
+
+    let resume = await Resume.findOne();
+    if (resume) {
+      resume.url = url.trim();
+      resume.updatedAt = Date.now();
+      await resume.save();
+    } else {
+      resume = await Resume.create({ url: url.trim() });
+    }
+
+    res.json({ success: true, url: resume.url });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
